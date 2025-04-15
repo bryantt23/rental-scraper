@@ -1,8 +1,4 @@
 {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = '.txt'
-
     let listingData = ``
 
     const delay = (delayTime) => {
@@ -39,7 +35,7 @@
         while (true) {
             await getListings()
             let nextPageButton = document.querySelector("#btn-page-next")
-            if (nextPageButton.disabled) {
+            if (!nextPageButton || nextPageButton.disabled) {
                 break;
             }
             nextPageButton.click()
