@@ -6,10 +6,11 @@
     }
 
     const goToNextPage = async () => {
-        for (let i = 0; i < 3; i++) {
-            const nextPageButton = document.querySelector("#btn-page-next")
+        let nextPageButton = document.querySelector("#btn-page-next")
+        while (!nextPageButton.disabled) {
             nextPageButton.click()
-            await delay(3000)
+            await delay(2000)
+            nextPageButton = document.querySelector("#btn-page-next")
         }
     }
 
