@@ -12,7 +12,6 @@
     }
 
     const updateFile = () => {
-        console.log("🚀 ~ updateFile ~ listingData:", listingData)
         const blob = new Blob([listingData], { type: 'text/plain' })
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
@@ -24,7 +23,7 @@
         URL.revokeObjectURL(url)// Clean up the object URL
     }
 
-    const getListings = () => {
+    const getListings = async () => {
         const listings = document.querySelectorAll(".listing-holder")
         for (const listing of listings) {
             const href = listing.querySelector("a").href
@@ -33,21 +32,23 @@
             const listingDescription = arr[0].innerText
             listingData += `\nDescription: ${listingDescription}URL: ${href}`
         }
+        await delay(1000)
     }
 
     const visitPages = async () => {
-        let nextPageButton = document.querySelector("#btn-page-next")
-        // while (!nextPageButton.disabled) {
-        getListings()
-        await delay(2000)
-        // debugger
-        // nextPageButton.click()
-        // nextPageButton = document.querySelector("#btn-page-next")
-        // }
+        while (true) {
+            await getListings()
+            let nextPageButton = document.querySelector("#btn-page-next")
+            if (nextPageButton.disabled) {
+                break;
+            }
+            nextPageButton.click()
+            await delay(1000)
+        }
     }
 
     const start = async () => {
-        visitPages()
+        await visitPages()
         updateFile()
     }
 
