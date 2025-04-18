@@ -26,7 +26,7 @@
             const tds = listing.querySelectorAll("td")
             const arr = Array.from(tds)
             const listingDescription = arr[0].innerText
-            listingData += `\nDescription: ${listingDescription}URL: ${href}`
+            listingData += `\nDescription: ${listingDescription}${href}`
         }
         await delay(1000)
     }
